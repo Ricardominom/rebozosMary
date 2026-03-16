@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --magenta: #da1e7a;
+    --magenta-deep: #a3145b;
+    --magenta-light: #f5d0e6;
+    --magenta-pale: #fdf0f8;
+    --negro: #1a0a12;
+    --hueso: #fdf8fb;
+    --algodon: #f7edf4;
+    --dorado: #c4843c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-hueso text-negro font-dm;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-playfair;
+  }
+}
+
+/* ── Keyframes ─────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleFade {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Animation utility classes ─────────────── */
+@layer utilities {
+  .animate-fade-up   { animation: fadeUp   0.6s cubic-bezier(0.22,1,0.36,1) both; }
+  .animate-fade-down { animation: fadeDown 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+  .animate-fade-left { animation: fadeLeft 0.65s cubic-bezier(0.22,1,0.36,1) both; }
+  .animate-fade-right{ animation: fadeRight 0.65s cubic-bezier(0.22,1,0.36,1) both; }
+  .animate-scale-fade{ animation: scaleFade 0.5s cubic-bezier(0.22,1,0.36,1) both; }
+
+  /* Delays para stagger */
+  .delay-0   { animation-delay: 0ms; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+}
+
+/* ── Reveal on scroll (Intersection Observer) ─ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+              transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.from-left  { transform: translateX(-32px); }
+.reveal.from-right { transform: translateX(32px); }
+.reveal.scale      { transform: scale(0.96); }
+
+.reveal.visible {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+@layer components {
+  .overline {
+    @apply text-xs font-dm font-medium uppercase tracking-[0.2em] text-magenta;
+  }
+
+  .btn-primary {
+    @apply bg-magenta text-white font-dm font-medium px-6 py-3 rounded-btn
+           hover:bg-magenta-deep transition-colors duration-200 inline-block
+           border border-magenta hover:border-magenta-deep;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-negro font-dm font-medium px-6 py-3 rounded-btn
+           border border-negro/20 hover:border-negro/50 transition-colors duration-200 inline-block;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-magenta font-dm font-medium px-6 py-3 rounded-btn
+           border border-magenta hover:bg-magenta hover:text-white transition-colors duration-200 inline-block;
+  }
+
+  .card {
+    @apply bg-white border border-negro/5 shadow-warm rounded-sm overflow-hidden;
+  }
+
+  .section-pad {
+    @apply py-16 md:py-24 px-4 md:px-8 max-w-7xl mx-auto;
+  }
+}
